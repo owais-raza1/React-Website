@@ -16,7 +16,7 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full overflow-hidden">
+    <header className="w-full overflow-hidden mt-16">
       <Slider {...settings} className="w-full">
         <div>
           <img

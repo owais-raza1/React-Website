@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 
-function NavBar() {
+function AddProductNav() {
   const navigate = useNavigate();
   return (
     <nav className="fixed z-10 left-0 right-0 top-0">
@@ -59,12 +59,21 @@ function NavBar() {
             <input
               placeholder="Search...."
               type="text"
-              className="px-2 rounded-full outline-none p-1"
+              className="px-2 rounded-full p-1 outline-none"
             />
             <button className="p-2 hover:bg-red-600 rounded-r-full hover:text-white">
               <SearchIcon />
             </button>
           </div>
+          <Btn
+            onClick={() => {
+              navigate("/add-product");
+            }}
+            variant="contained"
+            className="text-white bg-red-500 hover:bg-red-400 transition-all duration-300"
+            startIcon={<AddIcon />}
+            text="AddProduct"
+          />
           <Btn
             onClick={() => {
               navigate("/login");
@@ -87,4 +96,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default AddProductNav;

@@ -19,7 +19,7 @@ function NotFound() {
               home page.{" "}
             </p>
             <Link to="/">
-            <Btn variant="contained" text="Back to Home" />
+              <Btn variant="contained" text="Back to Home" />
             </Link>
           </div>
         </div>

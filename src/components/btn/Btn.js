@@ -1,11 +1,17 @@
 import React from "react";
 import { Button } from "@mui/material";
-// import { Margin } from '@mui/icons-material'
+
 function Btn(props) {
-  const { sx, variant, className, text } = props;
+  const { sx, variant, className, text, onClick, startIcon } = props;
   return (
     <div>
-      <Button sx={{ sx }} className={className} variant={variant}>
+      <Button
+        sx={{ sx }}
+        className={className}
+        variant={variant}
+        onClick={onClick}
+        startIcon={startIcon}
+      >
         {text}
       </Button>
     </div>
