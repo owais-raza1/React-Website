@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
-function Brand() {
+function Band() {
   return (
     <>
       <Navbar />
@@ -9,7 +9,7 @@ function Brand() {
         <br />
         <br />
         <h1 className="flex justify-center text-5xl font-sans text-gray-800">
-          The Brand
+          The Band
         </h1>
         <br />
         <h1 className="flex justify-center text-lg font-thin text-gray-600 italic">
@@ -65,4 +65,4 @@ function Brand() {
   );
 }
 
-export default Brand;
+export default Band;

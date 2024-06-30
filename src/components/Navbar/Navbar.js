@@ -30,10 +30,10 @@ function NavBar() {
           />
           <Btn
             onClick={() => {
-              navigate("/brand");
+              navigate("/band");
             }}
             variant="Contained"
-            text="Brand"
+            text="Band"
             className="p-4 hover:bg-gray-300 hover:text-black rounded-none sm:hidden md:hidden lg:block "
           />
           <Btn

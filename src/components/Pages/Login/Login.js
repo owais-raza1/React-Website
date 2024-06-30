@@ -5,14 +5,17 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import MuiLink from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../../Config/firebase/FirebaseMethods";
+import { useState } from "react";
+
 function Copyright(props) {
   return (
     <Typography
@@ -22,28 +25,25 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <MuiLink color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </MuiLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    loginUser(email, password, navigate);
   };
 
   return (
@@ -90,6 +90,9 @@ export default function SignInSide() {
               sx={{ mt: 1 }}
             >
               <TextField
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 margin="normal"
                 required
                 fullWidth
@@ -100,6 +103,9 @@ export default function SignInSide() {
                 autoFocus
               />
               <TextField
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 margin="normal"
                 required
                 fullWidth
@@ -114,9 +120,6 @@ export default function SignInSide() {
                 label="Remember me"
               />
               <Button
-                onClick={() => {
-                  navigate("/");
-                }}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -126,14 +129,18 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <MuiLink
+                    component={Link}
+                    to="/forgot-password"
+                    variant="body2"
+                  >
                     Forgot password?
-                  </Link>
+                  </MuiLink>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <MuiLink component={Link} to="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </MuiLink>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

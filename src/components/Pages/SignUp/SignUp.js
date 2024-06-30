@@ -5,7 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -13,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
+import { signUpUser } from "../../../Config/firebase/FirebaseMethods";
 import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
@@ -24,29 +26,27 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <MuiLink color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </MuiLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  let navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    signUpUser(email, password, navigate);
   };
 
   return (
@@ -76,6 +76,7 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={(e) => setFirstName(e.target.value)}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -87,6 +88,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={(e) => setLastName(e.target.value)}
                   required
                   fullWidth
                   id="lastName"
@@ -97,6 +99,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   fullWidth
                   id="email"
@@ -107,6 +110,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                   fullWidth
                   name="password"
@@ -125,11 +129,7 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-
             <Button
-              onClick={() => {
-                navigate("/login");
-              }}
               type="submit"
               fullWidth
               variant="contained"
@@ -139,9 +139,9 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <MuiLink component={Link} to="/login" variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </MuiLink>
               </Grid>
             </Grid>
           </Box>
